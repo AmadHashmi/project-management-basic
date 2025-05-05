@@ -9,6 +9,15 @@ function App() {
     projects: [],
   });
 
+  function handleSelectProject(id) {
+    setProjectsState((prevState) => {
+      return {
+        ...prevState,
+        selectedProjectId: id,
+      };
+    });
+  }
+
   function handleStartAddProject() {
     setProjectsState((prevState) => {
       return {
@@ -50,7 +59,7 @@ function App() {
     content = (
       <NewProject
         onHideNewProject={handleHideNewProject}
-        onAddProject={(data) => handleAddProject(data)}
+        onAdd={(data) => handleAddProject(data)}
       />
     );
   } else if (projectsState.selectedProjectId === undefined) {
@@ -61,6 +70,7 @@ function App() {
       <ProjectSidebar
         projects={projectsState.projects}
         onStartAddProject={handleStartAddProject}
+        onSelectProject={handleSelectProject}
       />
       {/* <NewProject /> */}
       {content}
